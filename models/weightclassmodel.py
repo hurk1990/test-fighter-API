@@ -3,7 +3,7 @@ from db import db
 class WeightClassModel(db.Model):
     __tablename__ = 'weightclasses'
     id = db.Column(db.Integer, primary_key = True)
-    weight = db.Column(db.Integer())
+    weight = db.Column(db.Integer(),unique = True)
     
     #the use of 'lazy = 'dynamic'' is really important. Otherwise you will create many items in memory which you may not need
     fighters = db.relationship('FighterModel',lazy='dynamic')
