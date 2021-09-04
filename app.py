@@ -17,10 +17,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'test'
 api = Api(app)
 
-#Like magic... it creates the tables required when you call a function which tries to commit something to a table
-@app.before_first_request
-def create_tables():
-    db.create_all()
+
 
 jwt = JWT(app, authenticate, identity) #/auth, send username and password
 
