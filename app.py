@@ -1,4 +1,5 @@
 import os
+import re
 
 from flask import Flask
 from flask_restful import  Api
@@ -13,7 +14,11 @@ from db import db
 #when imports are failing but you're sure the module is installed, go to cmd+shft+p, select interpreter and paste folder of venv
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite:///data.db')
+uri  = os.environ.get('DATABASE_URL','sqlite:///data.db')
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 #Don't put the key in the code normally!
 app.secret_key = 'test'
