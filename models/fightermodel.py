@@ -7,7 +7,6 @@ class FighterModel(db.Model):
     wins = db.Column(db.Integer)
     losses = db.Column(db.Integer)
     weight = db.Column(db.Integer,db.ForeignKey('weightclasses.weight'))
-    weightclass = db.relationship('WeightClassModel')
 
     def __init__(self, name, wins, losses, weight):
         self.name = name
